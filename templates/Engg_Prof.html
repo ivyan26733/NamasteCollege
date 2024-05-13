@@ -1,0 +1,160 @@
+{% extends 'x.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% comment %} <link rel="stylesheet" href="css/style.css" /> {% endcomment %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  display: block;
+  width: 100%;
+}
+body {
+  background: #f3f5fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "poppins", sans-serif;
+  color: #fff;
+}
+.container {
+  max-width: 1100px;
+  max-height: 100%;
+  margin: 0 auto;
+}
+.card_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  grid-gap: 2rem;
+  padding: 2rem 0;
+  margin: 2rem 0;
+}
+.card_data {
+  display: flex;
+  background: #212f3d;
+  padding: 2rem;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+  transition: all 0.9s ease-in-out;
+  border-radius: 10px;
+}
+.card_data:hover {
+  transform: translateY(-10px);
+}
+.card_data img {
+  border-radius: 05%;
+  width: 50%;
+  height: 100%;
+}
+.pro_content {
+  padding-left: 1rem;
+}
+.pro_content h2 {
+  font-size: 1.5rem;
+  color: #e74c3c;
+}
+.position {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.position::after {
+  content: "";
+  background: #ccc;
+  position: absolute;
+  width: 40%;
+  height: 2px;
+  top: 25px;
+  left: 0;
+}
+.pro_content p {
+  font-size: 0.9rem;
+}
+.social_icons {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  width: 80%;
+}
+.social_icons span {
+  {% comment %} background: #f3f5fa; {% endcomment %}
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.social_icons span i {
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  color: #212f3d;
+  transition: all 0.5s;
+}
+.social_icons span i:hover {
+  background: #212f3d;
+  color: #fff;
+  border-radius: 50%;
+}
+@media (max-width: 1100px) {
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 962px) {
+  .container {
+    max-width: 650px;
+    margin: 0 auto;
+  }
+  .card_container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1rem;
+  }
+}
+    </style>
+    <title>Responsive Profile Cards</title>
+  </head>
+  <body>
+    
+    <div class="container">
+      <div class="card_container">
+        {% for e in Engg %}
+        <div class="card_data">
+          <img style="width:180px;" src="{{ e.image.url }}" alt="" />
+          <div class="pro_content">
+            <div style="display:flex;">
+            <h2> {{e.name}} </h2> 
+            <span style="margin-left:15px; margin-top:6px;"><a style="color:yellow; font-size:15px;" href="mailto:{{e.gmail}}"><i class="fa-brands fa-google"></i></a></span>
+        </div>
+            <p class="position"> {{e.desig}} </p>
+            <p> {{e.quali}} </p>
+            <div style="display:flex; flex-direction:column;" class="social_icons">
+                <div style="display:flex;">
+              <span><i style="color:red; margin-top:-2px;" class="fas fa-phone-alt"></i></span> <div style="margin-left:5px; margin-top:3px;">{{e.phone}}</div>
+            </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

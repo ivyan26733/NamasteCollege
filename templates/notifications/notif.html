@@ -1,0 +1,47 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notification Section</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .notification-section {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      
+      .notification {
+        background-color: #f0f0f0;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+      
+      .notification h2 {
+        margin-top: 0;
+      }
+      
+      .notification p {
+        margin-bottom: 0;
+      }
+      
+  </style>
+</head>
+<body>
+    <h1>Notifications</h1>
+  <div class="notification-section">
+    {% for n in notifs %}
+    <div class="notification">
+      <h2>N-1</h2>
+      <p>{{ n.text }}</p>
+    </div>
+    {% endfor %}
+    <!-- Add more notifications as needed -->
+  </div>
+</body>
+</html>

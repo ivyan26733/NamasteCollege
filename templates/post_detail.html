@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            /* Adjust the height of the textarea here */
+            height: 50px; /* Set a fixed height */
+            /* Or use the number of rows */
+            /* height: auto; */
+            /* resize: vertical; */
+        }
+        button[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #555;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+  <h4 style="margin-left:10px; color:#6b00b1 !important;"><a style="text-decoration:none; font-size:18px; color:#6b00b1 !important;" href="/index">Back to Home</a></h4>
+
+    <header>
+        <h1>{{ post.title }}</h1>
+    </header>
+    <div class="container">
+        <article>
+            <h2>{{ post.title }}</h2>
+            {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 200px; height: 200px;">
+    {% else %}
+        <p></p>
+    {% endif %}
+            {% comment %} <img src="{{post.image.url}}" alt="No image uploaded by user" style="width: 200px; height: 200px;"> {% endcomment %}
+            <p>{{ post.content }}</p>
+        </article>
+        <section>
+            <h2>Comments</h2>
+            <ul>
+                {% for comment in comments %}
+                    <li>{{ comment.content }} - {{ comment.dauthor.username }}</li>
+                {% empty %}
+                    <li>No comments yet.</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section>
+            <h3>Add a comment</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Post</button>
+                <button style="background:blue;" type="submit"><a href="{% url 'all_posts' %}" style="color: white; text-decoration: none;">See All Doubt</a></button>
+                {% comment %} <div style="margin-top:0px;" class="container center mb-5">
+                    <button class="btn btn-primary"><a href="{% url 'create_post' %}" style="color: white; text-decoration: none;">Post Your Doubt</a></button>
+                </div> {% endcomment %}
+            </form>
+        </section>
+    </div>
+</body>
+</html>

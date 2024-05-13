@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Yourself</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>We have sent an OTP on your email for verification</h1>
+        <label for="otp">Enter OTP:</label>
+        <input type="text" name="otp" id="otp">
+        <button id="verifyBtn">Verify</button>
+    </div>
+
+    <script>
+        $('#otp').change(function(){
+            let otp = $('#otp').val();
+            console.log("OTP : ", otp)
+
+            if (otp== '{{otp}}' ){
+                console.log("OTP Matched")
+
+                $.ajax({
+                    type: "POST",
+                    url: '{% url "verifyEmail" %}',
+                    data: {'otp': otp, 'username': "{{username}}", 'email': "{{email}}", 'password1': "{{password1}}", 'password2': "{{password2}}"},
+                    success: function(data){
+                        console.log("OTP success")
+                        if (data === "success") {
+                            console.log("OTP Matched");
+                            window.location.href = "/";
+                        } else {
+                            console.log("OTP does not match");
+                            window.location.href = "/";
+                        }
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+</html>

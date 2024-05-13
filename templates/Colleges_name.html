@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Colleges</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png">
+  <style>
+    .poscenter {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      
+      body {
+        background: white;
+        transform: rotateX(0.003deg);
+        height: 100vh;
+        color: skyblue;
+      }
+      
+      a {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color:#6a5acd;
+        color: white;
+        text-decoration: none;
+        font-size: 1.5em;
+        display: inline-block;
+        font-family: Montserrat;
+        text-transform: uppercase;
+        padding: 0.5em 2em;
+        border: 2px solid skyblue;
+        {% comment %} border-radius:20px; {% endcomment %}
+        transition: 0.02s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+      }
+      
+      a::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 100%;
+        bottom: 0;
+        background: #ff6347;
+        transition: 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s cubic-bezier(0.1, 0, 0.1, 1);
+        z-index: -1;
+      }
+      
+      a::after {
+        content: "";
+        display: inline-block;
+        background-image: url('https://cdn-icons-png.flaticon.com/128/109/109617.png');
+        position: absolute;
+        top: 0;
+        left: calc(100% - 3em);
+        right: 3em;
+        bottom: 0;
+        background-size: 1.5em;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: right 0.3s cubic-bezier(0.1, 0, 0.1, 1);
+      }
+      
+      a:hover {
+        padding: 0.5em 3.5em 0.5em 0.5em;
+      }
+      
+      a:hover::before {
+        left: calc(100% - 3em);
+        right: 0;
+        {% comment %} border-radius:15px; {% endcomment %}
+        transition: 0.3s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+      }
+      
+      a:hover::after {
+        right: 0;
+        transition: right 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+      }
+      
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center; color:black;">Select College</h1>
+  
+  <a style="margin-top:-220px; width:350px; text-align: center;" href="/" >Dayalbagh Educational Institute</a>
+  <a style="margin-top:-140px; width:350px; text-align: center;" href="#" >Hindustan College</a> 
+  <a style="margin-top:-60px; width:350px; text-align: center;" href="#" >Agra College</a>
+  <a style="margin-top:20px; width:350px; text-align: center;" href="#" >RBS College</a>
+
+
+  <a style="margin-top:100px; width:350px; text-align: center;" href="#" >Anand Engineering College </a>
+  <a style="margin-top:180px; width:350px; text-align: center;" href="#" >Hindustan College</a>
+  {% comment %} <a style="margin-top:260px; width:350px; text-align: center;" href="/ayushprofessor" >Faculty of Ayush</a>
+  <a style="margin-top:340px; width:350px; text-align: center;" href="/artsprofessor" >Faculty of Arts</a> {% endcomment %}
+
+
+  <div></div>
+
+
+</body>
+</html>

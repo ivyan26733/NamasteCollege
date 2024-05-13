@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Create four columns */
+  gap: 20px; /* Space between cards */
+  padding: 20px; /* Padding around the grid */
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  text-align: center;
+  font-family: arial;
+  margin: auto; /* Center the card within the grid item if it's narrower than the max-width */
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
+<style>
+  .filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    flex: 0 0 calc(20% - 10px); /* Adjust width of form fields as needed */
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group select,
+  .form-group input[type="text"] {
+    width: calc(100% - 10px); /* Adjust width to accommodate margin */
+    padding: 8px;
+    margin-bottom: 10px; /* Add margin between each input field */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6b00b1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+</style>
+</head>
+<body>
+  <h4 style="margin-left:10px; color:#6b00b1 !important;"><a style="text-decoration:none; font-size:18px; color:#6b00b1 !important;" href="/index">Back to Home</a></h4>
+
+
+
+<h2 style="text-align:center">Our Alumnis</h2>
+
+<form method="post" class="filter-form">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="id_batch">Batch:</label>
+    {{ form.batch }}
+  </div>
+  <div class="form-group">
+    <label for="id_course">Course:</label>
+    {{ form.course }}
+  </div>
+  <div class="form-group">
+    <label for="id_branch">Branch:</label>
+    {{ form.branch }}
+  </div>
+  <div class="form-group">
+    <label for="id_company">Company:</label>
+    {{ form.company }}
+  </div>
+  <div class="form-group">
+    <label for="id_role">Role:</label>
+    {{ form.role }}
+  </div>
+  <button type="submit">Filter</button>
+</form>
+
+
+
+{% comment %} <div class="cards-container">
+  {% for a in alumni %}
+  <div class="card">
+    <img src="{{a.image.url}}" alt="John" style="width:100%; height:250px;">
+    <h1>{{a.Name}} - {{a.Batch}}</h1>
+    <p class="title">{{a.Company}}, {{a.Role}}</p>
+    <p>{{a.Course}}, {{a.Branch}}</p>
+    <div style="margin: 24px 0;">
+      <a href="{{a.linkedin}}"><i class="fa fa-linkedin"></i></a>
+    </div>
+  </div>
+  {% endfor %}
+</div> {% endcomment %}
+
+<div class="cards-container">
+  {% if filtered_alumni %}
+    {% for a in filtered_alumni %}
+    <div class="card">
+      <img src="{{a.image.url}}" alt="John" style="width:100%; height:250px;">
+      <h1>{{a.Name}} - {{a.Batch}}</h1>
+      <p class="title">{{a.Company}}, {{a.Role}}</p>
+      <p>{{a.Course}}, {{a.Branch}}</p>
+      <div style="margin: 24px 0;">
+        <a href="{{a.linkedin}}"><i class="fa fa-linkedin"></i></a>
+      </div>
+    </div>
+      <!-- Display filtered alumni data -->
+      <!-- Your existing card template here -->
+    {% endfor %}
+  {% else %}
+    {% for a in alumni %}
+    <div class="card">
+      <img src="{{a.image.url}}" alt="John" style="width:100%; height:250px;">
+      <h1>{{a.Name}} - {{a.Batch}}</h1>
+      <p class="title">{{a.Company}}, {{a.Role}}</p>
+      <p>{{a.Course}}, {{a.Branch}}</p>
+      <div style="margin: 24px 0;">
+        <a href="{{a.linkedin}}"><i class="fa fa-linkedin"></i></a>
+      </div>
+    </div>
+      <!-- Display all alumni if no filter applied -->
+      <!-- Your existing card template here -->
+    {% endfor %}
+  {% endif %}
+</div>
+
+
+
+</body>
+</html>

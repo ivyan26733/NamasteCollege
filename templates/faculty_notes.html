@@ -1,0 +1,138 @@
+{% extends 'x.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Professors</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f7f6;
+      color: #333;
+    }
+    .container {
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #6b00b1;
+      color: #fff;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box; /* Ensures the input fits inside the th element */
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">Virtual Library</h1>
+    <div class="container">
+        <table id="professorsTable">
+            <thead>
+                <tr>
+                  <th>Sr. No.</th>
+                  <th>Subject Name</th>
+                  <th>Subject Code</th>
+                  <th>Course</th>
+                  <th>Year</th>
+                  <th>Branch</th>
+                  <th>Notes</th>
+                </tr>
+                <tr> <!-- Adjusted Search fields row -->
+                  <th></th> <!-- Removed search input for the Sr. No. column -->
+                  <th><input type="text" onkeyup="searchTable(0)" placeholder="Search..." class="search-input"></th>
+                  <th><input type="text" onkeyup="searchTable(1)" placeholder="Search..." class="search-input"></th>
+                  <th><input type="text" onkeyup="searchTable(2)" placeholder="Search..." class="search-input"></th>
+                  <th><input type="text" onkeyup="searchTable(3)" placeholder="Search..." class="search-input"></th>
+                  <th><input type="text" onkeyup="searchTable(4)" placeholder="Search..." class="search-input"></th>
+                  <th></th> <!-- No search bar for the Notes column -->
+                </tr>
+                
+            </thead>
+            <tbody>
+                {% for n in notes %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ n.subject_name }}</td>
+          
+          <td>{{ n.subject_code }}</td>
+          <td>{{ n.course }}</td>
+          <td>{{ n.year }}</td>
+          <td>{{ n.branch }}</td>
+          <td>
+            {% if n.link %}
+            <a href="{{ n.link.url }}" target="_blank">Link</a>
+            {% else %}
+            No Notes Available
+            {% endif %}
+          </td>
+
+        </tr>
+        {% endfor %}
+                <!-- Your data rows here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+      function searchTable(column) {
+        var input, filter, table, tr, td, txtValue;
+        input = document.querySelectorAll(".search-input")[column]; // Use class selector for inputs
+        filter = input.value.toUpperCase();
+        table = document.getElementById("professorsTable");
+        tr = table.getElementsByTagName("tr");
+    
+        // Loop starts from the first data row, skipping the header and search rows
+        for (let i = 2; i < tr.length; i++) {
+            // Correctly target the td element, accounting for the first non-searchable column
+            td = tr[i].getElementsByTagName("td")[column + 1]; // Corrected the offset by adding 1
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    
+    </script>
+</body>
+</html>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'x.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br><br>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script> -->
+  <link rel="stylesheet" href="{% static 'assets2/style.css' %}">
+  <title>Login Form</title>
+  <style>
+    .notification-section {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      
+      .notification {
+        background-color: #f0f0f0;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+      
+      .notification h2 {
+        margin-top: 0;
+      }
+      
+      .notification p {
+        margin-bottom: 0;
+        width:20em;
+        color:blue;
+      }
+      .date{
+        font-size:10px;
+        margin-top:8px;
+        margin-left:-40px;
+        color:black;
+
+      }
+      
+  </style>
+</head>
+
+<body>
+  <style>
+    .new{
+      font-size:16px;
+    }
+  </style>
+
+  <div id="wrapper">
+    <div class="container">
+      <div class="phone-app-ddemo"></div>
+      <div class="form-data">
+        
+    
+
+        <form action="" method="POST" enctype="multipart/form-data">
+          <div class="logo">
+            <h3 style="padding-top: 5px; font-size: 20px;">Notifications</h3>
+          </div>
+
+            <!-- First Section -->
+            {% comment %} {% for notification in notifications %} {% endcomment %}
+                
+            <div class="notification-section">
+              {% for n in notifications reversed %}
+              <div class="notification">
+                {% comment %} <h5>N-1</h5> {% endcomment %}
+                <p>{{ n.text }}</p>
+                <p class="date" style="color:black;"> {{n.date_added}} </p>
+              </div>
+              {% endfor %}
+              <!-- Add more notifications as needed -->
+            </div>
+
+            {% comment %} {% endfor %} {% endcomment %}
+
+            <!-- third Section -->
+
+            
+
+        </form>
+
+
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <nav class="footer-nav">
+          <ul>
+            <li>
+              <a href="#">About us</a>
+            </li>
+            <li>
+              <a href="#">Support</a>
+            </li>
+            <li>
+              <a href="#">Press</a>
+            </li>
+            <li>
+              <a href="#">Api</a>
+            </li>
+            <li>
+              <a href="#">Jobs</a>
+            </li>
+            <li>
+              <a href="#">Privacy</a>
+            </li>
+            <li>
+              <a href="#">Terms</a>
+            </li>
+            <li>
+              <a href="#">Directory</a>
+            </li>
+            <li>
+              <a href="#">Profiles</a>
+            </li>
+            <li>
+              <a href="#">Hashtags</a>
+            </li>
+            <li>
+              <a href="#">Languages</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="copyright-notice">
+          &copy 2019 NamasteCollege
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+
+</html>
+{% endblock content %}
